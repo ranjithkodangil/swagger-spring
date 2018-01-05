@@ -1,0 +1,52 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Leave Quota Availability
+  description: Api to know to leave availablity for a particular block.
+  termsOfService: 'http://www.test.com/terms/'
+  contact:
+    name: Arcus Team
+    email: ranjithkumar.kodangil@boeing.com
+    url: 'http://swagger.io'
+  license:
+    name: MIT
+    url: 'http://opensource.org/licenses/MIT'
+host: api.crew.jeppesen.com
+basePath: /crew
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+paths:
+  /leave/quota:
+    get:
+      summary: Get leave quota for requested date.
+      responses:
+        '200':
+          description: Leave Quota
+          schema:
+            $ref: '#/definitions/quota'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+definitions:
+  quota:
+    type: object
+    properties:
+      availableQuota:
+        type: integer
+      description:
+        type: string
+  errorModel:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
